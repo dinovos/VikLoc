@@ -3,6 +3,7 @@ package vikmax.vikloc;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -38,7 +39,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-
+    Database baza;
+    Button button_ispis;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -66,6 +68,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        baza = new Database(this);
+        baza.insertData();
+        button_ispis = (Button)findViewById(R.id.button_ispis);
+        prikaziPodatke();
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -92,6 +98,37 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    public void prikaziPodatke(){
+        button_ispis.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Cursor podaci = baza.dohvatiPodatke();
+                        if(podaci.getCount() == 0){
+                            prikaziPoruku("Error", "Nema podataka u tablici");
+                            return;
+                        }
+                        StringBuffer buffer = new StringBuffer();
+                        while (podaci.moveToNext()){
+                            buffer.append("ime: "+podaci.getString(0)+"\n");
+                            buffer.append("prezime: "+podaci.getString(1)+"\n");
+                            buffer.append("korime: "+podaci.getString(2)+"\n");
+                            buffer.append("lozinka: "+podaci.getString(3)+"\n\n");
+                        }
+                        prikaziPoruku("Podaci", buffer.toString());
+                    }
+                }
+        );
+    }
+
+    public void prikaziPoruku(String naziv, String poruka){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(naziv);
+        builder.setMessage(poruka);
+        builder.show();
     }
 
     private void populateAutoComplete() {
