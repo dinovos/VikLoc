@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,6 +43,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
     Database baza;
     Button button_ispis;
+    Button button_prijava;
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -105,19 +108,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Cursor podaci = baza.dohvatiPodatke();
+                        Cursor podaci = baza.dohvatiPodatke(mEmailView.getText().toString(), mPasswordView.getText().toString());
                         if(podaci.getCount() == 0){
-                            prikaziPoruku("Error", "Nema podataka u tablici");
+                            prikaziPoruku("Error", "Upisani korisnik ne postoji");
                             return;
                         }
-                        StringBuffer buffer = new StringBuffer();
-                        while (podaci.moveToNext()){
-                            buffer.append("ime: "+podaci.getString(0)+"\n");
-                            buffer.append("prezime: "+podaci.getString(1)+"\n");
-                            buffer.append("korime: "+podaci.getString(2)+"\n");
-                            buffer.append("lozinka: "+podaci.getString(3)+"\n\n");
+
+                        if(v.getId() == R.id.button_ispis){
+                            Intent i = new Intent(LoginActivity.this, MenuActivity.class);
+                            startActivity(i);
                         }
-                        prikaziPoruku("Podaci", buffer.toString());
+                        /*StringBuffer buffer = new StringBuffer();
+                        while (podaci.moveToNext()){
+                            buffer.append("id: "+podaci.getString(0)+"\n");
+                            buffer.append("ime: "+podaci.getString(1)+"\n");
+                            buffer.append("prezime: "+podaci.getString(2)+"\n");
+                            buffer.append("korime: "+podaci.getString(3)+"\n");
+                            buffer.append("lozinka: "+podaci.getString(4)+"\n\n");
+                        }
+                        prikaziPoruku("Podaci", buffer.toString()); */
                     }
                 }
         );
