@@ -65,6 +65,15 @@ public class DatabaseAccess {
         return list;
     }
 
+    public boolean loginProvjera(String user, String lozinka){
+        Cursor podaci = database.rawQuery("SELECT * FROM KORISNIK where korisnicko_ime= '"+ user + "' and lozinka= '"+ lozinka +"'", null);
+        Integer brojac = podaci.getCount();
+        if(brojac == 0) {
+            return false;
+        }
+        return true;
+    }
+
 
 
 }
