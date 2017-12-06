@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_login);
+
         button_login = (Button)findViewById(R.id.button_login);
         user = (TextInputEditText)findViewById(R.id.textInput_user);
         password = (TextInputEditText)findViewById(R.id.textInput_password);
@@ -78,5 +79,6 @@ public class LoginActivity extends AppCompatActivity {
         builder.setMessage(poruka);
         builder.show();
     }
+
 }
 
