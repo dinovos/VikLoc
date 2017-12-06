@@ -32,6 +32,15 @@ public class LoginActivity extends AppCompatActivity {
         loginProvjera();
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        user.getText().clear();
+        password.getText().clear();
+        user.requestFocus();
+    }
+
     public void loginProvjera(){
         final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         button_login.setOnClickListener(
