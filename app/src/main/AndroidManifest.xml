@@ -26,6 +26,9 @@
         <activity
             android:name=".MenuActivity">
         </activity>
+        <activity
+            android:name=".ItemsActivity">
+        </activity>
     </application>
 
 </manifest>

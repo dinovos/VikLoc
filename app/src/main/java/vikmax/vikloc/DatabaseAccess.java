@@ -53,9 +53,9 @@ public class DatabaseAccess {
         return list;
     }
 
-    public List<String> dohvatiArtikle(){
+    public List<String> dohvatiArtikle(Integer kategorija){
         List<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT naziv FROM ARTIKL", null);
+        Cursor cursor = database.rawQuery("SELECT naziv FROM ARTIKL WHERE kategorija='" + kategorija + "'", null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             list.add(cursor.getString(0));
@@ -74,6 +74,14 @@ public class DatabaseAccess {
         return true;
     }
 
-
-
+    public int dohvatiBroj(String upit){
+        Cursor podaci = database.rawQuery(upit,null);
+        podaci.moveToFirst();
+        Integer broj;
+        if(podaci != null && podaci.moveToFirst())
+            broj = podaci.getInt(0);
+        else
+            broj = 0;
+        return broj;
+    }
 }
