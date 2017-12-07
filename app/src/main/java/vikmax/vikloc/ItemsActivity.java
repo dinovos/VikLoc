@@ -1,8 +1,11 @@
 package vikmax.vikloc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -17,6 +20,7 @@ import java.util.List;
 public class ItemsActivity  extends AppCompatActivity {
 
     private ListView listaArtikala;
+    private FloatingActionButton fab;
 
     android.support.v7.widget.Toolbar kategorija;
     @Override
@@ -46,6 +50,17 @@ public class ItemsActivity  extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, artikli);
             this.listaArtikala.setAdapter(adapter);
         }
+
+        fab = (FloatingActionButton) findViewById(R.id.floatingDodajArtikl);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ItemsActivity.this, AddProductActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     public Integer dohvatiIdKategorije(String kategorija){

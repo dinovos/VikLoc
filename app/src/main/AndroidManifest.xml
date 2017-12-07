@@ -32,6 +32,11 @@
         <activity
             android:name=".AddCategorieActivity">
         </activity>
+
+        <activity
+            android:name=".AddProductActivity">
+        </activity>
+
     </application>
 
 </manifest>
