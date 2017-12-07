@@ -38,6 +38,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MenuActivity.this, ItemsActivity.class);
                 intent.putExtra("kategorija", listaKategorija.getItemAtPosition(i).toString());
+                intent.putExtra("izradio", idKorisnika);
                 startActivity(intent);
             }
         });

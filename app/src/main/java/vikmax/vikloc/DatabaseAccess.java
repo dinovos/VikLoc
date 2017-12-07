@@ -97,4 +97,17 @@ public class DatabaseAccess {
         else
             return true;
     }
+
+    public boolean unesiArtikl(String naziv, String opis, Integer kategorija, Integer izradio){
+        ContentValues unos = new ContentValues();
+        unos.put("naziv", naziv);
+        unos.put("opis", opis);
+        unos.put("kategorija", kategorija);
+        unos.put("izradio", izradio);
+        long rezultat = database.insert("ARTIKL",null, unos);
+        if(rezultat == -1)
+            return false;
+        else
+            return true;
+    }
 }

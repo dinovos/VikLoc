@@ -21,6 +21,7 @@ public class ItemsActivity  extends AppCompatActivity {
 
     private ListView listaArtikala;
     private FloatingActionButton fab;
+    private Integer idKorisnika;
 
     android.support.v7.widget.Toolbar kategorija;
     @Override
@@ -33,10 +34,11 @@ public class ItemsActivity  extends AppCompatActivity {
         setContentView(R.layout.activity_items);
 
         kategorija = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_kategorija);
-        Bundle dohvaceno = getIntent().getExtras();
+        final Bundle dohvaceno = getIntent().getExtras();
         String dohvacenaKategorija;
         if(dohvaceno != null) {
             dohvacenaKategorija = dohvaceno.getString("kategorija");
+            idKorisnika = dohvaceno.getInt("izradio");
             kategorija.setTitle(dohvacenaKategorija);
             Integer idKategorije = dohvatiIdKategorije(dohvacenaKategorija);
 
@@ -57,6 +59,8 @@ public class ItemsActivity  extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(ItemsActivity.this, AddProductActivity.class);
+                i.putExtra("kategorija", dohvatiIdKategorije(dohvaceno.getString("kategorija")));
+                i.putExtra("izradio", idKorisnika);
                 startActivity(i);
             }
         });
