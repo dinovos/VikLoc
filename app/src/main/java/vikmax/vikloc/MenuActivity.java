@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,6 +18,7 @@ import java.util.List;
 public class MenuActivity extends AppCompatActivity {
 
     private ListView listaKategorija;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +39,25 @@ public class MenuActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, kategorije);
 
         listaKategorija.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(MenuActivity.this, ItemsActivity.class);
-                    intent.putExtra("kategorija", listaKategorija.getItemAtPosition(i).toString());
-                    startActivity(intent);
-                }
-            });
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MenuActivity.this, ItemsActivity.class);
+                intent.putExtra("kategorija", listaKategorija.getItemAtPosition(i).toString());
+                startActivity(intent);
+            }
+        });
         this.listaKategorija.setAdapter(adapter);
-        }
+
+        fab = (FloatingActionButton) findViewById(R.id.floatingDodajKategoriju);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MenuActivity.this, AddCategorieActivity.class);
+                startActivity(i);
+            }
+        });
+
+    }
+
 }

@@ -29,6 +29,9 @@
         <activity
             android:name=".ItemsActivity">
         </activity>
+        <activity
+            android:name=".AddCategorieActivity">
+        </activity>
     </application>
 
 </manifest>
