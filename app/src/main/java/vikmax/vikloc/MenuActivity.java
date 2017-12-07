@@ -3,6 +3,7 @@ package vikmax.vikloc;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -114,6 +115,31 @@ public class MenuActivity extends AppCompatActivity implements SearchView.OnQuer
             listaKategorija.setFilterText(s.toString());
         }
         return  true;
+    }
+
+    @Override
+    public void onBackPressed(){
+        AlertDialog.Builder builder  = new AlertDialog.Builder(this);
+        builder.setMessage("Odjava iz aplikacije?")
+                .setCancelable(false)
+                .setPositiveButton("Da", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        MenuActivity.this.onSuperBackPressed();
+                    }
+                })
+                .setNegativeButton("Ne", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    public void onSuperBackPressed(){
+        super.onBackPressed();
     }
 
 }
