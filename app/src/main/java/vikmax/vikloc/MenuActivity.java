@@ -19,6 +19,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private ListView listaKategorija;
     private FloatingActionButton fab;
+    private Integer idKorisnika;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +31,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         this.listaKategorija =  (ListView) findViewById(R.id.listKategorije);
-
-        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
-        databaseAccess.open();
-        List<String> kategorije = databaseAccess.dohvatiKategorije();
-        databaseAccess.close();
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, kategorije);
+        napuniListu();
 
         listaKategorija.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -46,7 +41,9 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        this.listaKategorija.setAdapter(adapter);
+
+        Bundle dohvaceniId = getIntent().getExtras();
+        idKorisnika = dohvaceniId.getInt("idKorisnik");
 
         fab = (FloatingActionButton) findViewById(R.id.floatingDodajKategoriju);
 
@@ -54,10 +51,28 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MenuActivity.this, AddCategorieActivity.class);
+                i.putExtra("idKorisnik", idKorisnika);
                 startActivity(i);
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        napuniListu();
+    }
+
+    private void napuniListu(){
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess.open();
+        List<String> kategorije = databaseAccess.dohvatiKategorije();
+        databaseAccess.close();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, kategorije);
+        this.listaKategorija.setAdapter(adapter);
     }
 
 }

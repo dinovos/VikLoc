@@ -1,5 +1,6 @@
 package vikmax.vikloc;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -83,5 +84,17 @@ public class DatabaseAccess {
         else
             broj = 0;
         return broj;
+    }
+
+    public boolean unesiKategoriju(String naziv, String opis, Integer izradio){
+        ContentValues unos = new ContentValues();
+        unos.put("naziv", naziv);
+        unos.put("opis", opis);
+        unos.put("izradio", izradio);
+        long rezultat = database.insert("KATEGORIJA",null, unos);
+        if(rezultat == -1)
+            return false;
+        else
+            return true;
     }
 }
