@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/viklocprijava" />
+            app:srcCompat="@drawable/viklockprijava"
+            android:contentDescription="@string/logo" />
 
 
         <android.support.design.widget.TextInputLayout
