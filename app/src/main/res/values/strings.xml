@@ -8,4 +8,6 @@
     <string name="textviewdodajkategoriju">Dodaj kategoriju</string>
     <string name="textviewdodajartikl">Dodaj artikl</string>
     <string name="text_save">Spremi</string>
+    <string name="search_title">Pretraži</string>
+    <string name="search_hint">Pretraži</string>
 </resources>
