@@ -3,6 +3,13 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical">
+
     <TextView
         android:id="@+id/textViewDodajKategoriju"
         android:layout_width="match_parent"
@@ -13,4 +20,50 @@
         android:textStyle="bold"
         android:textAlignment="center"
         android:text="@string/textviewdodajkategoriju" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/textInput_CategorieName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Naziv kategorije"
+            android:maxLines="1"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorText"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/textInput_CategorieDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Opis kategorije"
+            android:maxLines="1"
+            android:textColor="@color/colorText"
+            android:textColorHint="@color/colorText"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/button_spremikategoriju"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/darker_gray"
+        android:text="@string/text_save"
+        android:textColor="@color/colorText"
+        android:layout_gravity="right|end"
+        android:layout_marginRight="40dp"/>
+
 </LinearLayout>

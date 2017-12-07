@@ -7,4 +7,5 @@
     <string name="textviewkategorije">Kategorije artikala</string>
     <string name="textviewdodajkategoriju">Dodaj kategoriju</string>
     <string name="textviewdodajartikl">Dodaj artikl</string>
+    <string name="text_save">Spremi</string>
 </resources>

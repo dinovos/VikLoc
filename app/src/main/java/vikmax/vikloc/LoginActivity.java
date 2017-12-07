@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,6 +26,8 @@ public class LoginActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_login);
+
+        Toast.makeText(this, "Dobrodošli", Toast.LENGTH_SHORT).show();
 
         button_login = (Button)findViewById(R.id.button_login);
         user = (TextInputEditText)findViewById(R.id.textInput_user);
