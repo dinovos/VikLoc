@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -66,6 +67,54 @@ public class MenuActivity extends AppCompatActivity implements SearchView.OnQuer
             }
         });
 
+        listaKategorija.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                final String nazivKategorije = listaKategorija.getItemAtPosition(i).toString();
+                final Integer idKategorije = dohvatiIdKategorije(nazivKategorije);
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MenuActivity.this);
+                builder.setTitle("Brisanje odabrane kategorije?")
+                        .setCancelable(false)
+                        .setNegativeButton("Ne", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                return;
+                            }
+                        })
+                        .setPositiveButton("Da", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                int broj = brojArtikalaUKategoriji(idKategorije);
+                                if (broj != 0)
+                                {
+                                    final AlertDialog.Builder builder1 = new AlertDialog.Builder(MenuActivity.this);
+                                    builder1.setTitle("Obavijest")
+                                            .setCancelable(true)
+                                            .setMessage("Nije moguće obrisati! Kategorija '"+ nazivKategorije +"' sadrži artikle!");
+                                    AlertDialog dialog1 = builder1.create();
+                                    dialog1.show();
+                                }
+                                else
+                                {
+                                    brisanjeKategorije(nazivKategorije);
+                                    Toast.makeText(MenuActivity.this, "Kategorija obrisana", Toast.LENGTH_SHORT).show();
+                                    napuniListu();
+                                }
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+                return true;
+
+            }
+
+
+        });
+
     }
 
     @Override
@@ -83,6 +132,30 @@ public class MenuActivity extends AppCompatActivity implements SearchView.OnQuer
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, kategorije);
         this.listaKategorija.setAdapter(adapter);
+    }
+
+    private int brojArtikalaUKategoriji(int idKategorije) {
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess.open();
+        Integer brojArtikalaUKategoriji = databaseAccess.dohvatiBroj("SELECT COUNT(kategorija) FROM ARTIKL WHERE kategorija = '" + idKategorije + "'");
+        databaseAccess.close();
+        return brojArtikalaUKategoriji;
+    }
+
+    private void brisanjeKategorije(String nazivKategorije) {
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess.open();
+        databaseAccess.obrisiKategoriju(nazivKategorije);
+        databaseAccess.close();
+    }
+
+    private int dohvatiIdKategorije(String Kategorija)
+    {
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess.open();
+        Integer idKategorije = databaseAccess.dohvatiBroj("SELECT id FROM KATEGORIJA WHERE naziv = '" + Kategorija + "'");
+        databaseAccess.close();
+        return idKategorije;
     }
 
     @Override
