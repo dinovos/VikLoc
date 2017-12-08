@@ -68,8 +68,9 @@ public class LoginActivity extends AppCompatActivity {
                             return;
                         }
                         databaseAccess.open();
-                        Integer idKorisnik = databaseAccess.dohvatiBroj("SELECT id FROM KORISNIK WHERE korisnicko_ime='" + user + "'");
+                        Integer idKorisnik = databaseAccess.dohvatiBroj("SELECT id FROM KORISNIK WHERE korisnicko_ime='" + user.getText().toString() + "'");
                         databaseAccess.close();
+                        Toast.makeText(LoginActivity.this, "Dobrodošao "+ user.getText().toString(), Toast.LENGTH_LONG).show();
                         if(v.getId() == R.id.button_login) {
                             Intent i = new Intent(LoginActivity.this, MenuActivity.class);
                             i.putExtra("idKorisnik", idKorisnik);
