@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -39,7 +37,7 @@ public class MenuActivity extends AppCompatActivity implements SearchView.OnQuer
         setContentView(R.layout.activity_menu);
 
         this.listaKategorija =  (ListView) findViewById(R.id.listKategorije);
-        napuniListu();
+        osvjeziListu();
 
         listaKategorija.setTextFilterEnabled(true);
 
@@ -101,7 +99,7 @@ public class MenuActivity extends AppCompatActivity implements SearchView.OnQuer
                                 {
                                     brisanjeKategorije(nazivKategorije);
                                     Toast.makeText(MenuActivity.this, "Kategorija obrisana", Toast.LENGTH_SHORT).show();
-                                    napuniListu();
+                                    osvjeziListu();
                                 }
                             }
                         });
@@ -121,10 +119,10 @@ public class MenuActivity extends AppCompatActivity implements SearchView.OnQuer
     protected void onResume() {
         super.onResume();
 
-        napuniListu();
+        osvjeziListu();
     }
 
-    private void napuniListu(){
+    private void osvjeziListu(){
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         databaseAccess.open();
         List<String> kategorije = databaseAccess.dohvatiKategorije();

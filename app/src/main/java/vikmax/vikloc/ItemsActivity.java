@@ -1,10 +1,11 @@
 package vikmax.vikloc;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -12,10 +13,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toolbar;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -51,7 +53,7 @@ public class ItemsActivity  extends AppCompatActivity implements SearchView.OnQu
 
             this.listaArtikala = (ListView) findViewById(R.id.listArtikli);
 
-            napuniListu(idKategorije);
+            osvjeziListu(idKategorije);
 
         }
 
@@ -69,16 +71,49 @@ public class ItemsActivity  extends AppCompatActivity implements SearchView.OnQu
             }
         });
 
+        listaArtikala.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                final String nazivArtikla = listaArtikala.getItemAtPosition(i).toString();
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(ItemsActivity.this);
+                builder.setTitle("Brisanje odabranog artikla?")
+                        .setCancelable(false)
+                        .setNegativeButton("Ne", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                return;
+                            }
+                        })
+                        .setPositiveButton("Da", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                brisanjeArtikla(nazivArtikla);
+                                Toast.makeText(ItemsActivity.this, "Artikl obrisan", Toast.LENGTH_SHORT).show();
+                                osvjeziListu(idKategorije);
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+                return true;
+
+            }
+
+
+        });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        napuniListu(idKategorije);
+        osvjeziListu(idKategorije);
     }
 
-    private void napuniListu(Integer idKategorije){
+    private void osvjeziListu(Integer idKategorije){
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         databaseAccess.open();
         List<String> artikli = databaseAccess.dohvatiArtikle(idKategorije);
@@ -94,6 +129,13 @@ public class ItemsActivity  extends AppCompatActivity implements SearchView.OnQu
         Integer idKategorije = databaseAccess.dohvatiBroj("SELECT id FROM KATEGORIJA WHERE naziv='" + kategorija + "'");
         databaseAccess.close();
         return idKategorije;
+    }
+
+    private void brisanjeArtikla(String nazivArtikla) {
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+        databaseAccess.open();
+        databaseAccess.obrisiArtikl(nazivArtikla);
+        databaseAccess.close();
     }
 
     @Override

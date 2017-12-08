@@ -115,4 +115,8 @@ public class DatabaseAccess {
         database.execSQL("DELETE FROM KATEGORIJA WHERE naziv = '" + nazivKategorije + "'");
     }
 
+    public void obrisiArtikl(String nazivArtikla) {
+        database.execSQL("DELETE FROM ARTIKL WHERE naziv = '"+nazivArtikla+"'");
+    }
+
 }
