@@ -42,6 +42,10 @@
             android:name=".AddProductActivity">
         </activity>
 
+        <activity
+            android:name=".DetailsActivity">
+        </activity>
+
     </application>
 
 </manifest>

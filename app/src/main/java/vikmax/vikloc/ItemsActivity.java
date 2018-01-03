@@ -59,6 +59,15 @@ public class ItemsActivity  extends AppCompatActivity implements SearchView.OnQu
 
         listaArtikala.setTextFilterEnabled(true);
 
+        listaArtikala.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(ItemsActivity.this, DetailsActivity.class);
+                intent.putExtra("artikl", listaArtikala.getItemAtPosition(i).toString());
+                startActivity(intent);
+            }
+        });
+
         fab = (FloatingActionButton) findViewById(R.id.floatingDodajArtikl);
 
         fab.setOnClickListener(new View.OnClickListener() {

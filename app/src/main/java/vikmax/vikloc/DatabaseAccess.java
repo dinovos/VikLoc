@@ -119,4 +119,19 @@ public class DatabaseAccess {
         database.execSQL("DELETE FROM ARTIKL WHERE naziv = '"+nazivArtikla+"'");
     }
 
+    public ArrayList<String> dohvatiDetaljeAtrikla(String nazivArtikla){
+        ArrayList<String> listaDetalja = new ArrayList<>();
+        Cursor podaci = database.rawQuery("SELECT s.adresa, s.opis, s.naziv, p.oznaka FROM SKLADISTE s JOIN POZICIJA p on s.id = p.SKLADISTE JOIN ARTIKL a on p.ARTIKL = a.id WHERE a.naziv = '"+nazivArtikla+"'", null);
+        podaci.moveToFirst();
+        while(!podaci.isAfterLast()){
+            listaDetalja.add(podaci.getString(0));
+            listaDetalja.add(podaci.getString(1));
+            listaDetalja.add(podaci.getString(2));
+            listaDetalja.add(podaci.getString(3));
+            podaci.moveToNext();
+        }
+        podaci.close();
+        return  listaDetalja;
+    }
+
 }
