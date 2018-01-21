@@ -5,17 +5,20 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -207,6 +210,21 @@ public class MenuActivity extends AppCompatActivity implements SearchView.OnQuer
                 });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    RelativeLayout relativeLayout;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        relativeLayout = (RelativeLayout) findViewById(R.id.primary_relativeLayout);
+
+        if(id == R.id.action_settings){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public void onSuperBackPressed(){
