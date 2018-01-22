@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import dinovos.database.DatabaseAccess;
+
 /**
  * Created by Hrvoje on 6.12.2017..
  */

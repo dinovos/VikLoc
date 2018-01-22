@@ -1,4 +1,4 @@
-package vikmax.vikloc;
+package dinovos.database;
 
 import android.content.Context;
 

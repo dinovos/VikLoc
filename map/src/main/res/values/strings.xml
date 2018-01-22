@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">map</string>
+    <string name="textviewkdetaljiartikla">Detalji artikla</string>
+    <string name="adresaSkladista">Adresa skladišta</string>
+    <string name="opisSkladista">Opis skladišta</string>
+    <string name="nazivSkladista">Naziv skladišta</string>
+    <string name="oznakaSkladista">Oznaka skladišnog mjesta</string>
 </resources>

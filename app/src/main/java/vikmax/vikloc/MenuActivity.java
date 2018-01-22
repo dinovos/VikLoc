@@ -5,7 +5,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +22,8 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.List;
+
+import dinovos.database.DatabaseAccess;
 
 public class MenuActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 

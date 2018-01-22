@@ -1,4 +1,4 @@
-package vikmax.vikloc;
+package dinovos.map;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +13,7 @@ import dinovos.database.DatabaseAccess;
  * Created by Dino on 3.1.2018..
  */
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsMapActivity extends AppCompatActivity {
 
     private String nazivArtikla;
 
@@ -30,7 +30,7 @@ public class DetailsActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_details);
+        setContentView(R.layout.activity_details_map);
 
         Bundle dohvaceniArtikl = getIntent().getExtras();
         nazivArtikla = dohvaceniArtikl.getString("artikl");

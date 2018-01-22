@@ -8,6 +8,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import dinovos.database.DatabaseAccess;
+
 
 public class AddCategorieActivity extends AppCompatActivity {
 
