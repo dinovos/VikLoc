@@ -11,7 +11,7 @@
     <string name="search_title">Pretraži</string>
     <string name="search_hint">Pretraži</string>
     <string name="logo">logo</string>
-    <string name="oznakaSkladista">Oznaka skladišta</string>
+    <string name="oznakaSkladista">Oznaka skladišnog mjesta</string>
     <string name="nazivSkladista">Naziv skladišta</string>
     <string name="opisSkladista">Opis skladišta</string>
     <string name="adresaSkladista">Adresa skladišta</string>
