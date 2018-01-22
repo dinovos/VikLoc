@@ -30,6 +30,25 @@ public class MenuActivity extends AppCompatActivity implements SearchView.OnQuer
     private ListView listaKategorija;
     private FloatingActionButton fab;
     private Integer idKorisnika;
+    private Boolean odabranModul;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.mapaAktivacija:
+                odabranModul = true;
+                Toast toast = Toast.makeText(this, "Aktiviran modul MAPA", Toast.LENGTH_SHORT);
+                toast.show();
+                return odabranModul;
+            case R.id.mapaDeaktivacija:
+                odabranModul = false;
+                Toast toast1 = Toast.makeText(this, "Deaktiviran modul MAPA", Toast.LENGTH_SHORT);
+                toast1.show();
+                return  odabranModul;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +70,7 @@ public class MenuActivity extends AppCompatActivity implements SearchView.OnQuer
                 Intent intent = new Intent(MenuActivity.this, ItemsActivity.class);
                 intent.putExtra("kategorija", listaKategorija.getItemAtPosition(i).toString());
                 intent.putExtra("izradio", idKorisnika);
+                intent.putExtra("odabranModul", odabranModul);
                 startActivity(intent);
             }
         });
@@ -65,6 +85,7 @@ public class MenuActivity extends AppCompatActivity implements SearchView.OnQuer
             public void onClick(View view) {
                 Intent i = new Intent(MenuActivity.this, AddCategorieActivity.class);
                 i.putExtra("idKorisnik", idKorisnika);
+                i.putExtra("odabranModul", odabranModul);
                 startActivity(i);
             }
         });
@@ -215,18 +236,6 @@ public class MenuActivity extends AppCompatActivity implements SearchView.OnQuer
 
     RelativeLayout relativeLayout;
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        relativeLayout = (RelativeLayout) findViewById(R.id.primary_relativeLayout);
-
-        if(id == R.id.action_settings){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 
     public void onSuperBackPressed(){
         super.onBackPressed();

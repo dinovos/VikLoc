@@ -34,6 +34,7 @@ public class ItemsActivity  extends AppCompatActivity implements SearchView.OnQu
     private FloatingActionButton fab;
     private Integer idKorisnika;
     private Integer idKategorije;
+    private Boolean odabranModul;
 
     android.support.v7.widget.Toolbar kategorija;
     @Override
@@ -53,7 +54,7 @@ public class ItemsActivity  extends AppCompatActivity implements SearchView.OnQu
             idKorisnika = dohvaceno.getInt("izradio");
             kategorija.setTitle(dohvacenaKategorija);
             idKategorije = dohvatiIdKategorije(dohvacenaKategorija);
-
+            odabranModul = dohvaceno.getBoolean("odabranModul");
             this.listaArtikala = (ListView) findViewById(R.id.listArtikli);
 
             osvjeziListu(idKategorije);
@@ -67,9 +68,18 @@ public class ItemsActivity  extends AppCompatActivity implements SearchView.OnQu
         listaArtikala.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(ItemsActivity.this, DetailsActivity.class);
-                intent.putExtra("artikl", listaArtikala.getItemAtPosition(i).toString());
-                startActivity(intent);
+                if(odabranModul == true)
+                {
+                    Intent intent = new Intent(ItemsActivity.this, DetailsMapActivity.class);
+                    intent.putExtra("artikl", listaArtikala.getItemAtPosition(i).toString());
+                    startActivity(intent);
+                }
+                if(odabranModul == false)
+                {
+                    Intent intent = new Intent(ItemsActivity.this, DetailsActivity.class);
+                    intent.putExtra("artikl", listaArtikala.getItemAtPosition(i).toString());
+                    startActivity(intent);
+                }
             }
         });
 

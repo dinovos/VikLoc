@@ -3,9 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/mapaAktivacija"
         android:orderInCategory="100"
-        android:title="Mapa"
+        android:title="Mapa: ON"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/mapaDeaktivacija"
+        android:orderInCategory="100"
+        android:title="Mapa: OFF"
         app:showAsAction="never"
         />
     <item
