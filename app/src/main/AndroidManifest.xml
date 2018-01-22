@@ -46,6 +46,10 @@
             android:name=".DetailsActivity">
         </activity>
 
+        <activity android:name="dinovos.map.DetailsMapActivity">
+
+        </activity>
+
     </application>
 
 </manifest>

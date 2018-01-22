@@ -1,13 +1,20 @@
 package dinovos.map;
 
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import dinovos.database.DatabaseAccess;
+
 
 /**
  * Created by Dino on 3.1.2018..
@@ -22,6 +29,7 @@ public class DetailsMapActivity extends AppCompatActivity {
     private TextView nazivSkladistaText;
     private TextView oznakaSkladistaText;
     private TextView nazivArtiklaText;
+    private ImageView slikaSkladista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +76,68 @@ public class DetailsMapActivity extends AppCompatActivity {
             nazivSkladistaText.setText("Nepoznato");
             oznakaSkladistaText = findViewById(R.id.textOznakaSkladista);
             oznakaSkladistaText.setText("Nepoznato");
+
+        }
+
+        if(brojSkladista == 1){
+            slikaSkladista = findViewById(R.id.imageView);
+            InputStream is = null;
+            try {
+                AssetManager assetManager = getAssets();
+                is = assetManager.open("img/skl1.png");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            slikaSkladista.setImageBitmap(bitmap);
+        }
+        if(brojSkladista == 2){
+            slikaSkladista = findViewById(R.id.imageView);
+            InputStream is = null;
+            try {
+                AssetManager assetManager = getAssets();
+                is = assetManager.open("img/skl2.png");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            slikaSkladista.setImageBitmap(bitmap);
+        }
+        if(brojSkladista == 3){
+            slikaSkladista = findViewById(R.id.imageView);
+            InputStream is = null;
+            try {
+                AssetManager assetManager = getAssets();
+                is = assetManager.open("img/skl3.png");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            slikaSkladista.setImageBitmap(bitmap);
+        }
+        if(brojSkladista == 4){
+            slikaSkladista = findViewById(R.id.imageView);
+            InputStream is = null;
+            try {
+                AssetManager assetManager = getAssets();
+                is = assetManager.open("img/skl4.png");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            slikaSkladista.setImageBitmap(bitmap);
+        }
+        if(brojSkladista == 5){
+            slikaSkladista = findViewById(R.id.imageView);
+            InputStream is = null;
+            try {
+                AssetManager assetManager = getAssets();
+                is = assetManager.open("img/skl5.png");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            slikaSkladista.setImageBitmap(bitmap);
         }
 
 

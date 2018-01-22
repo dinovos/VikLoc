@@ -22,6 +22,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import dinovos.database.DatabaseAccess;
+import dinovos.map.DetailsMapActivity;
 
 /**
  * Created by Hrvoje on 6.12.2017..
@@ -60,6 +61,8 @@ public class ItemsActivity  extends AppCompatActivity implements SearchView.OnQu
         }
 
         listaArtikala.setTextFilterEnabled(true);
+
+        //otvaranje modula sa prikazom ili bez
 
         listaArtikala.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
