@@ -1,5 +1,7 @@
 package vikmax.vikloc;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
@@ -7,13 +9,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import dinovos.DetailsInterface;
 import dinovos.database.DatabaseAccess;
+import dinovos.map.DetailsMapActivity;
 
 /**
  * Created by Dino on 3.1.2018..
  */
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity implements DetailsInterface {
 
     private String nazivArtikla;
 
@@ -100,5 +104,10 @@ public class DetailsActivity extends AppCompatActivity {
         return pozicija;
     }
 
-
+    @Override
+    public Intent getIntent(Context context, String artiklId) {
+        Intent intent = new Intent(context, DetailsActivity.class);
+        intent.putExtra("artikl", artiklId);
+        return intent;
+    }
 }

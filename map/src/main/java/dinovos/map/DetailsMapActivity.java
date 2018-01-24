@@ -1,5 +1,7 @@
 package dinovos.map;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import dinovos.DetailsInterface;
 import dinovos.database.DatabaseAccess;
 
 
@@ -20,7 +23,7 @@ import dinovos.database.DatabaseAccess;
  * Created by Dino on 3.1.2018..
  */
 
-public class DetailsMapActivity extends AppCompatActivity {
+public class DetailsMapActivity extends AppCompatActivity implements DetailsInterface {
 
     private String nazivArtikla;
 
@@ -170,5 +173,10 @@ public class DetailsMapActivity extends AppCompatActivity {
         return pozicija;
     }
 
-
+    @Override
+    public Intent getIntent(Context context, String artiklId) {
+        Intent intent = new Intent(context, DetailsMapActivity.class);
+        intent.putExtra("artikl", artiklId);
+        return intent;
+    }
 }

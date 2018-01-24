@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import dinovos.DetailsInterface;
 import dinovos.database.DatabaseAccess;
 import dinovos.map.DetailsMapActivity;
 
@@ -68,18 +70,16 @@ public class ItemsActivity  extends AppCompatActivity implements SearchView.OnQu
         listaArtikala.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                DetailsInterface details;
                 if(odabranModul == true)
                 {
-                    Intent intent = new Intent(ItemsActivity.this, DetailsMapActivity.class);
-                    intent.putExtra("artikl", listaArtikala.getItemAtPosition(i).toString());
-                    startActivity(intent);
-                }
-                if(odabranModul == false)
+                    details = new DetailsMapActivity();
+                } else
                 {
-                    Intent intent = new Intent(ItemsActivity.this, DetailsActivity.class);
-                    intent.putExtra("artikl", listaArtikala.getItemAtPosition(i).toString());
-                    startActivity(intent);
+                    details = new DetailsActivity();
                 }
+                Intent intent = details.getIntent(ItemsActivity.this, listaArtikala.getItemAtPosition(i).toString());
+                startActivity(intent);
             }
         });
 
@@ -128,6 +128,22 @@ public class ItemsActivity  extends AppCompatActivity implements SearchView.OnQu
 
         });
 
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.mapaAktivacija:
+                odabranModul = true;
+                Toast toast = Toast.makeText(this, "Aktiviran modul MAPA", Toast.LENGTH_SHORT);
+                toast.show();
+                return odabranModul;
+            case R.id.mapaDeaktivacija:
+                odabranModul = false;
+                Toast toast1 = Toast.makeText(this, "Deaktiviran modul MAPA", Toast.LENGTH_SHORT);
+                toast1.show();
+                return  odabranModul;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
